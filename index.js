@@ -5,7 +5,7 @@ const pool = new pg.Pool({
   host: 'localhost',
   port: 5432,
   database: 'socialnetwork',
- user: 'myusername',
+  user: 'myusername',
   password: 'mypassword'
 });
 
@@ -64,17 +64,10 @@ app.post('/posts', async (req, res) => {
   const { lng, lat } = req.body;
 
   await pool.query(
-<<<<<<< HEAD
     'INSERT INTO posts (loc ) VALUES ($1);', 
     [
     `(${lng},${lat})`,
       ]);
-=======
-    'INSERT INTO posts (lat, lng, loc ) VALUES ($1, $2, $3);', 
-    [lat, 
-	lng, 
-	`(${lng},${lat})`]);
->>>>>>> cb1eb0d...  app server add new loc column to send data too
 
   res.redirect('/posts');
 });
