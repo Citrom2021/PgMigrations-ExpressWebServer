@@ -5,7 +5,7 @@ const pool = new pg.Pool({
   host: 'localhost',
   port: 5432,
   database: 'socialnetwork',
-  user: 'myusername',
+  user: 'nyusername',
   password: 'mypassword'
 });
 
@@ -20,7 +20,6 @@ app.get('/posts', async (req, res) => {
   const { rows } = await pool.query(`
     SELECT * FROM posts;
   `);
-
 
   res.send(`
     <table>
@@ -37,8 +36,8 @@ app.get('/posts', async (req, res) => {
             return `
             <tr>
               <td>${row.id}</td>
-              <td>${row.loc.x}</td>
-              <td>${row.loc.y}</td>
+              <td>${row.lng}</td>
+              <td>${row.lat}</td>
             </tr>
           `;
           })
@@ -59,21 +58,3 @@ app.get('/posts', async (req, res) => {
     </form>
   `);
 });
-
-app.post('/posts', async (req, res) => {
-  const { lng, lat } = req.body;
-
-  await pool.query(
-    'INSERT INTO posts (loc ) VALUES ($1);', 
-    [
-    `(${lng},${lat})`,
-      ]);
-
-  res.redirect('/posts');
-});
-
-app.listen(3005, () => {
-  console.log('Listening on port 3005');
-});
-
-
