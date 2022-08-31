@@ -5,8 +5,8 @@ const pool = new pg.Pool({
   host: 'localhost',
   port: 5432,
   database: 'socialnetwork',
-  user: 'nyusername',
-  password: 'mypassword'
+  user: 'postgres',
+  password: 'Ghostdog99'
 });
 
  /* pool.query('SELECT 1 + 1;').then((res) => console.log(res)); 
@@ -57,4 +57,16 @@ app.get('/posts', async (req, res) => {
       <button type="submit">Create</button>
     </form>
   `);
+});
+
+app.post('/posts', async (req, res) => {
+  const { lng, lat } = req.body;
+
+  await pool.query('INSERT INTO posts (lat, lng) VALUES ($1, $2);', [lat, lng]);
+
+  res.redirect('/posts');
+});
+
+app.listen(3005, () => {
+  console.log('Listening on port 3005');
 });
