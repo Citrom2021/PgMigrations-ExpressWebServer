@@ -1,3 +1,4 @@
+// tested works
 const express = require('express');
 const pg = require('pg');
 
@@ -8,6 +9,7 @@ const pool = new pg.Pool({
   user: 'myusername',
   password: 'mypassword'
 });
+
 
  /* pool.query('SELECT 1 + 1;').then((res) => console.log(res)); 
  -- query for checking connection above 
